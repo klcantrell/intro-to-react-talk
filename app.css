@@ -1,0 +1,15 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.count_display {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.count_incrementer {
+  font-size: 3rem;
+}
