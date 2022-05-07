@@ -3,7 +3,7 @@ let countState = 0;
 const root = document.getElementById('root');
 
 const app = document.createElement('main');
-app.className = 'app';
+app.className = 'main';
 
 const countDisplay = document.createElement('p');
 countDisplay.textContent = `${countState}`;
@@ -24,6 +24,21 @@ countIncrementer.addEventListener('click', () => {
 
 // root.append(app)
 
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledParagraph = styled.p`
+  font-size: 2rem;
+  text-align: center;
+`;
+
+const StyledButton = styled.button`
+  font-size: 3rem;
+`;
 
 function App() {
   const [count, setCount] = React.useState(0);
@@ -33,14 +48,13 @@ function App() {
   }, [count]);
 
   return (
-    <main className="app">
-      <p className="count_display">{count}</p>
-      <button
-        className="count_incrementer"
+    <StyledMain>
+      <StyledParagraph>{count}</StyledParagraph>
+      <StyledButton
         onClick={() => setCount((prev) => prev + 1)}>
       +
-      </button>
-    </main>
+      </StyledButton>
+    </StyledMain>
   );
 }
 
