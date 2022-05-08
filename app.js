@@ -1,64 +1,59 @@
-let countState = 0;
+const FRUIT_EMOJIS = ['🍓', '🍎', '🍇', '🍌', '🫐'];
 
-const root = document.getElementById('root');
+const countDisplay = document.getElementById('countDisplay');
+const fruitContainer = document.getElementById('fruitContainer');
+const fruitsUnboppedCount = document.getElementById('fruitsUnboppedCount');
+const totalFruitsBoppedCount = document.getElementById('totalBoppedCount');
 
-const app = document.createElement('main');
-app.className = 'main';
-
-const countDisplay = document.createElement('p');
-countDisplay.textContent = `${countState}`;
-countDisplay.className = 'count_display';
-
-const countIncrementer = document.createElement('button');
-countIncrementer.textContent = '+';
-countIncrementer.className = 'count_incrementer';
+const countIncrementer = document.getElementById('countIncrementer');
 countIncrementer.addEventListener('click', () => {
-  countState += 1
-  countDisplay.textContent = `${countState}`;
-  document.title = `The count is ${countState}`;
+  const currentCount = parseInt(countDisplay.value)
+  const newCount = currentCount + 1
+  countDisplay.value = newCount;
+
+  const fruitElement = document.createElement('div');
+  fruitElement.className = 'fruit-element';
+  fruitElement.style.top = `${Math.random() * fruitContainer.getBoundingClientRect().height}px`;
+  fruitElement.style.left = `${Math.random() * fruitContainer.getBoundingClientRect().width}px`;
+  fruitElement.textContent = FRUIT_EMOJIS[Math.floor(Math.random() * FRUIT_EMOJIS.length)];
+  fruitElement.addEventListener('click', () => {
+    fruitContainer.removeChild(fruitElement);
+    countDisplay.value = document.querySelectorAll('.fruit-element').length;
+    fruitsUnboppedCount.textContent = document.querySelectorAll('.fruit-element').length;
+    const currentTotalBopped = parseInt(totalFruitsBoppedCount.textContent);
+    totalFruitsBoppedCount.textContent = currentTotalBopped + 1;
+  });
+  fruitContainer.appendChild(fruitElement);
+
+  fruitsUnboppedCount.textContent = document.querySelectorAll('.fruit-element').length;
 });
 
+countDisplay.addEventListener('change', (event) => {
+  const numFruitsToAdd = parseInt(event.target.value) < 0 || isNaN(parseInt(event.target.value))
+    ? 0
+    : parseInt(event.target.value);
+  if (numFruitsToAdd === 0) {
+    countDisplay.value = 0;
+  }
+  while (fruitContainer.firstChild) {
+    fruitContainer.removeChild(fruitContainer.firstChild);
+  }
 
-// app.appendChild(countDisplay);
-// app.appendChild(countIncrementer);
+  for (let i = 0; i < numFruitsToAdd; i++) {
+    const fruitElement = document.createElement('div');
+    fruitElement.className = 'fruit-element';
+    fruitElement.style.top = `${Math.random() * fruitContainer.getBoundingClientRect().height}px`;
+    fruitElement.style.left = `${Math.random() * fruitContainer.getBoundingClientRect().width}px`;
+    fruitElement.textContent = FRUIT_EMOJIS[Math.floor(Math.random() * FRUIT_EMOJIS.length)];
+    fruitElement.addEventListener('click', () => {
+      fruitContainer.removeChild(fruitElement);
+      countDisplay.value = document.querySelectorAll('.fruit-element').length;
+      fruitsUnboppedCount.textContent = document.querySelectorAll('.fruit-element').length;
+      const currentTotalBopped = parseInt(totalFruitsBoppedCount.textContent);
+      totalFruitsBoppedCount.textContent = currentTotalBopped + 1;
+    });
+    fruitContainer.appendChild(fruitElement);
+  }
 
-// root.append(app)
-
-const StyledMain = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledParagraph = styled.p`
-  font-size: 2rem;
-  text-align: center;
-`;
-
-const StyledButton = styled.button`
-  font-size: 3rem;
-`;
-
-function App() {
-  const [count, setCount] = React.useState(0);
-
-  React.useEffect(() => {
-    document.title = count;
-  }, [count]);
-
-  return (
-    <StyledMain>
-      <StyledParagraph>{count}</StyledParagraph>
-      <StyledButton
-        onClick={() => setCount((prev) => prev + 1)}>
-      +
-      </StyledButton>
-    </StyledMain>
-  );
-}
-
-ReactDOM.render(
-  <App />,
-  root,
-)
+  fruitsUnboppedCount.textContent = document.querySelectorAll('.fruit-element').length;
+});
