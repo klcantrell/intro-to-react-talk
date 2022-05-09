@@ -3,13 +3,6 @@ body, h1, h2, p {
   padding: 0;
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .count-display {
   width: 100px;
   margin-block: 30px;

@@ -1,0 +1,29 @@
+{
+  "name": "intro-to-react-talk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klcantrell/intro-to-react-talk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/klcantrell/intro-to-react-talk/issues"
+  },
+  "homepage": "https://github.com/klcantrell/intro-to-react-talk#readme",
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.9.2",
+    "parcel": "^2.5.0"
+  }
+}
