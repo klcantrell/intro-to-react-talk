@@ -24,6 +24,11 @@ body, h1, h2, p {
 .count-display {
   font-size: 6rem;
   margin-bottom: 20px;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .add-button {

@@ -5,11 +5,12 @@ const addButton = document.getElementById('addButton');
 const fruitContainer = document.getElementById('fruitContainer');
 
 addButton.addEventListener('click', onAddClicked);
+countDisplay.addEventListener('change', onCountDisplayChanged);
 
 function onAddClicked() {
-  const currentCount = parseInt(countDisplay.textContent)
+  const currentCount = parseInt(countDisplay.value)
   const newCount = currentCount + 1
-  countDisplay.textContent = newCount;
+  countDisplay.value = newCount;
 
   renderFruitEmoji();
 }
@@ -26,5 +27,21 @@ function renderFruitEmoji() {
 
 function onFruitEmojiClicked(event) {
   fruitContainer.removeChild(event.currentTarget);
-  countDisplay.textContent = document.querySelectorAll('.fruit-element').length;
+  countDisplay.value = document.querySelectorAll('.fruit-element').length;
+}
+
+function onCountDisplayChanged(event) {
+  const numFruitsToAdd = parseInt(event.target.value) < 0 || isNaN(parseInt(event.target.value))
+    ? 0
+    : parseInt(event.target.value);
+  if (numFruitsToAdd === 0) {
+    countDisplay.value = 0;
+  }
+  while (fruitContainer.firstChild) {
+    fruitContainer.removeChild(fruitContainer.firstChild);
+  }
+
+  for (let i = 0; i < numFruitsToAdd; i++) {
+    renderFruitEmoji();
+  }
 }
