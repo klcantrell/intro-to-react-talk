@@ -3,6 +3,8 @@ const FRUIT_EMOJIS = ['🍓', '🍎', '🍇', '🍌', '🫐'];
 const countDisplay = document.getElementById('countDisplay');
 const addButton = document.getElementById('addButton');
 const fruitContainer = document.getElementById('fruitContainer');
+const fruitsUnboppedCount = document.getElementById('fruitsUnboppedCount');
+const totalFruitsBoppedCount = document.getElementById('totalBoppedCount');
 
 addButton.addEventListener('click', onAddClicked);
 countDisplay.addEventListener('change', onCountDisplayChanged);
@@ -23,11 +25,16 @@ function renderFruitEmoji() {
   fruitElement.textContent = FRUIT_EMOJIS[Math.floor(Math.random() * FRUIT_EMOJIS.length)];
   fruitElement.addEventListener('click', onFruitEmojiClicked);
   fruitContainer.appendChild(fruitElement);
+
+  fruitsUnboppedCount.textContent = getFruitEmojisRemaining();
 }
 
 function onFruitEmojiClicked(event) {
   fruitContainer.removeChild(event.currentTarget);
-  countDisplay.value = document.querySelectorAll('.fruit-element').length;
+  const fruitEmojisRemaining = getFruitEmojisRemaining();
+  countDisplay.value = fruitEmojisRemaining;
+  fruitsUnboppedCount.textContent = fruitEmojisRemaining;
+  incrementTotalBopCount();
 }
 
 function onCountDisplayChanged(event) {
@@ -44,4 +51,13 @@ function onCountDisplayChanged(event) {
   for (let i = 0; i < numFruitsToAdd; i++) {
     renderFruitEmoji();
   }
+}
+
+function getFruitEmojisRemaining() {
+  return document.querySelectorAll('.fruit-element').length;
+}
+
+function incrementTotalBopCount() {
+  const currentTotalBopped = parseInt(totalFruitsBoppedCount.textContent);
+  totalFruitsBoppedCount.textContent = currentTotalBopped + 1;
 }

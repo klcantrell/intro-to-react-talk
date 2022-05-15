@@ -8,6 +8,18 @@
 </head>
 <body>
     <main id="appContainer" class="app-container">
+        <header id="stats" class="stats">
+            <p class="stats-heading">Stats</p>
+            <div class="stats-item">
+                <p class="stats-label">Fruits unbopped</p>
+                <p id="fruitsUnboppedCount">0</p>
+            </div>
+            <span class="stats-divider"></span>
+            <div class="stats-item">
+                <p class="stats-label">Total fruits bopped</p>
+                <p id="totalBoppedCount">0</p>
+            </div>
+        </header>
         <input id="countDisplay" class="count-display" value="0">
         <button id="addButton" class="add-button">+</button>
         <div id="fruitContainer" class="fruit-container"></div>
