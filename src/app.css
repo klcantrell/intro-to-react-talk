@@ -1,56 +1,8 @@
+:root, body, #app {
+  height: 100%;
+}
+
 body, h1, h2, p {
   margin: 0;
   padding: 0;
-}
-
-.count-display {
-  width: 100px;
-  margin-block: 30px;
-  font-size: 3rem;
-  text-align: center;
-}
-
-.count-incrementer {
-  font-size: 3rem;
-}
-
-.fruit-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.fruit-element {
-  position: absolute;
-  font-size: 3rem;
-  pointer-events: auto;
-  cursor: default;
-}
-
-.stats {
-  width: 100%;
-  display: flex;
-  border: 1px solid black;
-  padding-block: 5px;
-}
-
-.stats-heading {
-  font-weight: bold;
-  margin-left: 5px;
-  margin-right: 20px;
-}
-
-.stats-item {
-  display: flex;
-  align-items: flex-end;
-  margin: 0;
-  margin-right: 15px;
-}
-
-.stats-label {
-  margin-right: 5px;
 }
