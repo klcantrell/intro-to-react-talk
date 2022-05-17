@@ -30,9 +30,29 @@ function App() {
     );
   };
 
+  const onDisplayChanged = (event) => {
+    const numFruitsToAdd = parseInt(event.target.value) < 0 || isNaN(parseInt(event.target.value))
+      ? 0
+      : parseInt(event.target.value);
+
+    const newFruits = [];
+    for (let i = 0; i < numFruitsToAdd; i++) {
+      const newFruit = FRUIT_EMOJIS[Math.floor(Math.random() * FRUIT_EMOJIS.length)];
+      newFruits.push(
+        {
+          text: newFruit,
+          top: Math.random() * fruitContainerRef.current.getBoundingClientRect().height,
+          left: Math.random() * fruitContainerRef.current.getBoundingClientRect().width,
+        },
+      );
+    }
+
+    setFruitEmojis(newFruits);
+  };
+
   return (
     <main css={styles.appContainer}>
-      <CountDisplay value={fruitEmojis.length} />
+      <CountDisplay value={fruitEmojis.length} onChange={onDisplayChanged} />
       <AddButton onClick={onAddClicked} title="+" />
       <FruitContainer
         containerRef={fruitContainerRef}
