@@ -8,6 +8,7 @@ export default function CountDisplay({ onChange, value }) {
 
 const styles = {
   countDisplay: css`
+    margin-top: 100px;
     font-size: 6rem;
     margin-bottom: 20px;
     width: 120px;

@@ -5,11 +5,13 @@ import "./app.css";
 import CountDisplay from "./components/CountDisplay";
 import AddButton from "./components/AddButton";
 import FruitContainer from "./components/FruitContainer";
+import Stats from "./components/Stats";
 
 const FRUIT_EMOJIS = ["🍓", "🍎", "🍇", "🍌", "🫐"];
 
 function App() {
   const [fruitEmojis, setFruitEmojis] = React.useState([]);
+  const [totalFruitsBopped, setTotalFruitsBopped] = React.useState(0);
   const fruitContainerRef = React.useRef();
 
   const onAddClicked = () => {
@@ -28,6 +30,7 @@ function App() {
     setFruitEmojis((previousFruits) =>
       previousFruits.filter((_fruit, i) => i !== atIndex)
     );
+    setTotalFruitsBopped((previousTotal) => previousTotal + 1);
   };
 
   const onDisplayChanged = (event) => {
@@ -52,6 +55,11 @@ function App() {
 
   return (
     <main css={styles.appContainer}>
+      <Stats heading="Stats">
+        <Stats.Item label="Fruits unbopped" value={fruitEmojis.length} />
+        <Stats.Divider />
+        <Stats.Item label="Total fruits bopped" value={totalFruitsBopped} />
+      </Stats>
       <CountDisplay value={fruitEmojis.length} onChange={onDisplayChanged} />
       <AddButton onClick={onAddClicked} title="+" />
       <FruitContainer
@@ -65,7 +73,7 @@ function App() {
 
 const styles = {
   appContainer: css`
-    height: calc(100% - 100px);
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,7 +84,6 @@ const styles = {
       rgba(21, 9, 121, 0.8197872899159664) 35%,
       rgba(0, 212, 255, 1) 100%
     );
-    padding-top: 100px;
   `,
 };
 
