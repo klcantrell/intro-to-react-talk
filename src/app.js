@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { css } from "@emotion/react";
 import "./app.css";
+import CountDisplay from "./components/CountDisplay";
+import AddButton from "./components/AddButton";
+import FruitContainer from "./components/FruitContainer";
 
 const FRUIT_EMOJIS = ["🍓", "🍎", "🍇", "🍌", "🫐"];
 
@@ -29,22 +32,13 @@ function App() {
 
   return (
     <main css={styles.appContainer}>
-      <p css={styles.countDisplay}>{fruitEmojis.length}</p>
-      <button css={styles.addButton} onClick={onAddClicked}>
-        +
-      </button>
-      <div css={styles.fruitContainer} ref={fruitContainerRef}>
-        {fruitEmojis.map((fruitEmoji, index) => (
-          <div
-            key={index}
-            style={{ top: fruitEmoji.top, left: fruitEmoji.left }}
-            css={styles.fruitElement}
-            onClick={() => onFruitEmojiClicked({ atIndex: index })}
-          >
-            {fruitEmoji.text}
-          </div>
-        ))}
-      </div>
+      <CountDisplay value={fruitEmojis.length} />
+      <AddButton onClick={onAddClicked} title="+" />
+      <FruitContainer
+        containerRef={fruitContainerRef}
+        fruits={fruitEmojis}
+        onFruitClicked={onFruitEmojiClicked}
+      />
     </main>
   );
 }
@@ -63,42 +57,6 @@ const styles = {
       rgba(0, 212, 255, 1) 100%
     );
     padding-top: 100px;
-  `,
-  countDisplay: css`
-    font-size: 6rem;
-    margin-bottom: 20px;
-  `,
-  addButton: css`
-    width: 100px;
-    height: 100px;
-    font-size: 5rem;
-    border-radius: 10px;
-    border-width: 4px;
-    border-top-color: rgb(166, 166, 166);
-    border-left-color: rgb(166, 166, 166);
-    box-shadow: 2px 2px 8px 0px rgba(0, 21, 43, 0.75);
-
-    &:active {
-      border-top-color: rgb(0, 0, 0);
-      border-left-color: rgb(0, 0, 0);
-      box-shadow: initial;
-      opacity: 0.6;
-    }
-  `,
-  fruitContainer: css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    overflow: hidden;
-  `,
-  fruitElement: css`
-    position: absolute;
-    font-size: 3rem;
-    pointer-events: auto;
-    cursor: default;
   `,
 };
 
